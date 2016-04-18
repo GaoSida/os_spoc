@@ -58,9 +58,18 @@ class Stride:
             print "-------------------------------"
         # 打印所有任务的统计情况
         print "stats: "
+        sum_reponse = 0
+        sum_turnaround = 0
+        sum_wait = 0
         for job in job_done:
+            sum_reponse += job.response
+            sum_turnaround += job.total_lenth + job.wait
+            sum_wait += job.wait
             print "Job " + str(job.pid) + " -- Response: " + str(job.response) + \
                 "  Turnaround: " + str(job.total_lenth + job.wait) + " Wait: " + str(job.wait)
+        print "Average -- Response: " + str(1.0 * sum_reponse / len(job_done)) + \
+            "  Turnaround: " + str(1.0 * sum_turnaround / len(job_done)) + \
+            " Wait: " + str(1.0 * sum_wait / len(job_done))
 
 
 
